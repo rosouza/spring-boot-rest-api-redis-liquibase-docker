@@ -3,6 +3,7 @@ Code Challenge with SpringBoot, REST Api, Redis, Liquibase, Docker
 
 # Local Enrivonment Requirements:
 Maven 3.x
+
 Docker
 
 # In the root folder run:
