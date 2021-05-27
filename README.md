@@ -10,14 +10,10 @@ Docker
 
 mvn install
 
-docker-compose build --no-cache tracker-api
-
-docker-compose build --no-cache client-service
-
-docker-compose build --no-cache supplier-api
+docker compose build
 
 docker compose up
 
-# Client will be running as a scheduled service under client-service module:
+# Client will be running as a scheduled service under client-service module running with a given cron expression:
 
 com.rosouza.supplier.service.ClientService
