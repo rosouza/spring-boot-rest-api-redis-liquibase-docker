@@ -17,3 +17,7 @@ docker-compose build --no-cache client-service
 docker-compose build --no-cache supplier-api
 
 docker compose up
+
+# Client will be running as a scheduled service under client-service module:
+
+com.rosouza.supplier.service.ClientService
