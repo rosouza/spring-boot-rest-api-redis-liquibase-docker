@@ -1,0 +1,68 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:12
+    hostname: postgres-host
+    ports:
+      - 5432:5432
+    command: -p 5432
+    environment:
+      - POSTGRES_DB=supplier
+      - POSTGRES_USER=supplier
+      - POSTGRES_PASSWORD=supplier
+    volumes:
+      - ./supplier-api/sql/create-tables.sql:/docker-entrypoint-initdb.d/create-tables.sql
+      - ./supplier-api/sql/initial-load.sql:/docker-entrypoint-initdb.d/initial-load.sql
+
+  redis:
+    container_name: redis
+    image: redis
+    hostname: redis-host
+    command: redis-server
+    ports:
+      - "6379:6379"
+
+  tracker-api:
+    container_name: tracker-api
+    build: ./tracker-api
+    image: tracker-api
+    restart: always
+    ports:
+      - 8082:8082
+    healthcheck:
+      test: "exit 0"
+
+  supplier-api:
+    container_name: supplier-api
+    build: ./supplier-api
+    image: supplier-api
+    depends_on:
+      - postgres
+      - redis
+      - tracker-api
+    hostname: supplier-api
+    restart: always
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: "exit 0"
+    environment:
+      - "SPRING_PROFILES_ACTIVE=dev"
+
+  client-service:
+    container_name: client-service
+    build: client-service/
+    image: client-service
+    depends_on:
+      - supplier-api
+    restart: always
+    ports:
+      - 8081:8081
+    healthcheck:
+      test: "exit 0"
+
+volumes:
+  esdata:
+    driver: local
