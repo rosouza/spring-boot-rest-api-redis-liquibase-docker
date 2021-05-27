@@ -1,7 +1,11 @@
 # spring-boot-rest-api-redis-liquibase-docker
 Code Challenge with SpringBoot, REST Api, Redis, Liquibase, Docker
 
-In the root folder run:
+# Local Enrivonment Requirements:
+Maven 3.x
+Docker
+
+# In the root folder run:
 
 mvn install
 
