@@ -10,9 +10,9 @@ Docker
 
 mvn install
 
-docker compose build
+docker-compose build --no-cache
 
-docker compose up
+docker compose up --force-recreate
 
 # Client will be running as a scheduled service under client-service module running with a given cron expression:
 
