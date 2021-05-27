@@ -6,7 +6,7 @@ Maven 3.x
 
 Docker
 
-# In the root folder run:
+# In the root folder run below commands:
 
 mvn install
 
